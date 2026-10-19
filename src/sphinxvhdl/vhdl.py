@@ -269,7 +269,8 @@ class VHDLEntityIOGenericDirective(SphinxDirective):
                 row += description_entry
                 current_description_lines = StringList()
             else:
-                current_description_lines.append(self.content[index], source=self.content.info(index))
+                source, offset = self.content.info(index)
+                current_description_lines.append(self.content[index], source=source or '', offset=offset)
             index += 1
         if row is not None:
             self.state.nested_parse(current_description_lines.get_indented()[0], 0, description_entry)
